@@ -1,0 +1,73 @@
+<div class="report-form-container">
+    <header class="form-header">
+      <h1>Nuevo Reporte de Mantenimiento</h1>
+      <button type="button" class="back-button" (click)="router.navigate(['/reports'])">
+        Volver
+      </button>
+    </header>
+  
+    <form [formGroup]="reportForm" (ngSubmit)="submitReport()">
+      <div class="form-group">
+        <label for="equipmentId">ID del Equipo</label>
+        <input 
+          type="text" 
+          id="equipmentId" 
+          formControlName="equipmentId" 
+          placeholder="Ej. EQ-2024-001">
+        <div class="error-message" *ngIf="reportForm.get('equipmentId')?.invalid && reportForm.get('equipmentId')?.touched">
+          ID del equipo es requerido
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="technician">Técnico</label>
+        <input 
+          type="text" 
+          id="technician" 
+          formControlName="technician" 
+          placeholder="Nombre del técnico">
+        <div class="error-message" *ngIf="reportForm.get('technician')?.invalid && reportForm.get('technician')?.touched">
+          Nombre del técnico es requerido
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Descripción del Problema</label>
+        <textarea 
+          id="description" 
+          formControlName="description" 
+          rows="4" 
+          placeholder="Describe el problema encontrado..."></textarea>
+        <div class="error-message" *ngIf="reportForm.get('description')?.invalid && reportForm.get('description')?.touched">
+          La descripción es requerida y debe tener al menos 10 caracteres
+        </div>
+      </div>
+  
+      <div class="photos-section">
+        <h2>Fotografías</h2>
+        <button type="button" class="camera-button" (click)="takePicture()">
+          <span class="camera-icon">📷</span> Tomar Foto
+        </button>
+  
+        <div class="photos-gallery" *ngIf="capturedPhotos.length > 0">
+          <div class="photo-item" *ngFor="let photo of capturedPhotos; let i = index">
+            <img [src]="photo" alt="Foto capturada">
+            <button type="button" class="remove-photo" (click)="removePhoto(i)">×</button>
+          </div>
+        </div>
+        
+        <div class="empty-photos" *ngIf="capturedPhotos.length === 0">
+          <p>No hay fotos capturadas. Pulse el botón "Tomar Foto" para añadir evidencias.</p>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="submit-button" 
+          [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Guardando...' : 'Guardar Reporte' }}
+        </button>
+      </div>
+    </form>
+  </div>

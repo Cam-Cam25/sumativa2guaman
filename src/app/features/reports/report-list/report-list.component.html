@@ -1,0 +1,50 @@
+<div class="reports-container">
+    <header class="reports-header">
+      <h1>Reportes de Mantenimiento</h1>
+      <button type="button" class="add-report-button" (click)="navigateToNewReport()">
+        + Nuevo Reporte
+      </button>
+    </header>
+  
+    <div class="loading-indicator" *ngIf="isLoading">
+      <p>Cargando reportes...</p>
+    </div>
+  
+    <div class="empty-state" *ngIf="!isLoading && reports.length === 0">
+      <div class="empty-icon">📋</div>
+      <h2>No hay reportes</h2>
+      <p>Comienza creando tu primer reporte de mantenimiento</p>
+      <button type="button" class="create-first-button" (click)="navigateToNewReport()">
+        Crear Primer Reporte
+      </button>
+    </div>
+  
+    <div class="reports-list" *ngIf="!isLoading && reports.length > 0">
+      <div class="report-card" *ngFor="let report of reports" (click)="viewReportDetails(report.id)">
+        <div class="report-header">
+          <div class="report-meta">
+            <span class="report-date">📅 {{ formatDate(report.creationDate) }}</span>
+            <span class="report-id">🔧 {{ report.equipmentId }}</span>
+            <span class="report-technician">👤 {{ report.technician }}</span>
+          </div>
+          <div class="report-status" [ngClass]="{'status-active': report.status === 'Activo', 
+                                               'status-completed': report.status === 'Completado',
+                                               'status-pending': report.status === 'Pendiente'}">
+            {{ report.status }}
+          </div>
+        </div>
+        
+        <div class="report-description">
+          {{ report.description }}
+        </div>
+        
+        <div class="report-photos" *ngIf="report.photoUrls && report.photoUrls.length > 0">
+          <div class="photo-count">{{ report.photoUrls.length }} foto(s)</div>
+          <div class="photos-preview">
+            <img *ngFor="let photo of report.photoUrls.slice(0, 3)" [src]="photo" alt="Foto de reporte">
+            <div class="more-photos" *ngIf="report.photoUrls.length > 3">+{{ report.photoUrls.length - 3 }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
