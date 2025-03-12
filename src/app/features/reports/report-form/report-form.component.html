@@ -1,9 +1,7 @@
 <div class="report-form-container">
     <header class="form-header">
       <h1>Nuevo Reporte de Mantenimiento</h1>
-      <button type="button" class="back-button" (click)="router.navigate(['/reports'])">
-        Volver
-      </button>
+      <a routerLink="/inicio" routerLinkActive="active">Volver</a>        
     </header>
   
     <form [formGroup]="reportForm" (ngSubmit)="submitReport()">

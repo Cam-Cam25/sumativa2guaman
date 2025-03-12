@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CameraService } from '../../../core/services/camera.service';
 import { ReportService } from '../../../core/services/report.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-report-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './report-form.component.html',
   styleUrls: ['./report-form.component.scss']
 })

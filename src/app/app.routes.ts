@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+// src/app/app-routing.module.ts
+import { Routes } from '@angular/router';
+import { ReportListComponent } from './features/reports/report-list/report-list.component';
+import { ReportFormComponent } from './features/reports/report-form/report-form.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'reports',
@@ -9,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    loadComponent: () => import('./features/reports/report-list/report-list.component').then(m => m.ReportListComponent)
+    component: ReportListComponent
   },
   {
     path: 'reports/new',
-    loadComponent: () => import('./features/reports/report-form/report-form.component').then(m => m.ReportFormComponent)
+    component: ReportFormComponent
   },
   {
     path: '**',
@@ -21,8 +23,3 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

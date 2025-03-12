@@ -19,7 +19,7 @@
       </button>
     </div>
   
-    <div class="reports-list" *ngIf="!isLoading && reports.length > 0">
+    <div class="reports-list scrollable" *ngIf="!isLoading && reports.length > 0">
       <div class="report-card" *ngFor="let report of reports" (click)="viewReportDetails(report.id)">
         <div class="report-header">
           <div class="report-meta">
